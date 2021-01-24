@@ -37,10 +37,15 @@ gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+# ページネーション用のビューファイルの自動生成コマンド
+# bundle exec rails g kaminari:views bootstrap4
+gem "kaminari"
+gem "rails-i18n"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "rails-flog", require:"flog"
 end
 
 group :development do
@@ -51,6 +56,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-byebug'
+  gem "annotate"
 end
 
 group :test do

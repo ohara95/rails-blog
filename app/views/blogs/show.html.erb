@@ -1,6 +1,8 @@
 <div class="d-flex align-items-center mt-4 mb-4">
   <div class="ml-auto boards__linkBox">
     <%= link_to '一覧', blogs_path, class: 'btn btn-outline-dark' %>
+    <%# pathに編集対象のオブジェクトを引数として渡すことでそのオブジェクトを編集するためのURLを出力してくれる %>
+    <%= link_to '編集', edit_blog_path(@blog), class: 'btn btn-outline-dark' %>
   </div>
 </div>
 
@@ -8,3 +10,16 @@
   <div class="alert alert-primary"><%= flash[:notice] %></div>
 <% end %>
 
+<%# object:@blogとした場合は、パーシャル名と同名のローカル変数が作成されてパーシャルに渡される %>
+<%= render partial:'blog', object:@blog %>
+<%# モデルのオブジェクトを表示する場合 %>
+<%# render @blog %>
+<div class="p-comment__list">
+  <div class="p-comment__listTitle">コメント</div>
+  <%# オブジェクトのリストをrenderの引数に渡した場合は
+  自動的にモデル名のビューが使用され、オブジェクトの数だけ繰り返しレンダリングされる %>
+  <%# renderの対象：comments %>
+  <%= render @blog.comments %>
+</div>
+
+<%= render 'comments/form', comment: @comment %>
