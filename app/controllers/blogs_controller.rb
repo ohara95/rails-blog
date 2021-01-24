@@ -38,26 +38,27 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    # memo attributes？
+    #.attributes -> オブジェクトの属性情報（id, name, titleなど）をHashの形式で取得するメソッド
+    # memo 何故ハッシュに格納する必要が？
     @blog.attributes = flash[:blog] if flash[:blog]
   end
 
   def update
     # プロパティ名_値
-    # memo updateはnewと違ってsaveとかないからこういう書き方？
+    # memo updateはnewと違ってsaveとかないからこういう書き方 -> update ≠ save
     if @blog.update(blog_params)
       redirect_to @blog, flash: { notice: '更新できました' }
     else
-      redirect_to :back,
-                  flash: {
-                    blog: @blog,
-                    error_messages: @blog.errors.full_messages,
-                  }
+      redirect_back fallback_location: @blog,
+                    flash: {
+                      blog: @blog,
+                      error_messages: @blog.errors.full_messages,
+                    }
     end
   end
 
   def destroy
-    @blog.delete
+    @blog.destroy
     redirect_to blogs_path, flash: { notice: '削除されました' }
   end
 
