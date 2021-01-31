@@ -1,6 +1,24 @@
 <div class="d-flex align-items-center">
-  <h1>掲示板一覧</h1>
+  <h1>ブログ一覧</h1>
   <div class="ml-auto boards__linkBox">
+  <%# ブログを送信したときにブログ一覧画面のアクションが表示される %>
+  <%= form_with url: blogs_path, method: :get, class: 'boards__searchForm' do %>
+  <%# セレクトボックスのnameがtag_idになる %>
+  <%# options_from_collection_for_select オプション要素を複数表示 %>
+      <%= select_tag :tag_id,
+      # 第4引数は何を選択状態にするかの指定
+      # 一度選択したタグを選択後も表示するのでparams[:tag_id]を指定
+                     options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                     {
+                      #  何も選択されていない状態
+                       prompt: 'タグで絞り込み',
+                       class: 'form-control boards__select',
+                      #  選択されるたびに実行されるJSのコード
+                      # 選択肢から選んだ時点でformをサブミット
+                       onchange: 'submit(this.form);'
+                     }
+      %>
+    <% end %>
     <%# new_blog_path = /blogs/new %>
     <%= link_to '新規作成', new_blog_path, class: "btn btn-outline-dark" %>
   </div>

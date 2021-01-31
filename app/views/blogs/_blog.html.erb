@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-header">
     <h4><%= blog.title %></h4>
+    <%# ここを付けなければエラーは出ないがタグも出ない %>
+    <% blog.tags.each do |tag| %>
+      <span class="badge badge-primary"><%= tag.name %></span>
+    <% end %>
   </div>
   <div class="card-body">
     <p class="card-text"><%= simple_format(blog.body) %></p>

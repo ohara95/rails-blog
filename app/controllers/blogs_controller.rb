@@ -4,8 +4,14 @@ class BlogsController < ApplicationController
 
   def index
     # @blogs = Blog.all
+    # tag_idに該当するtagを取得してtagオブジェクトから関連するブログを取得
+    # tag_idがあった場合にはタグをtag_idから検索してタグに紐付くブログのリストを取得
+
+    @blogs =
+      params[:tag_id].present? ? Tag.find(params[:tag_id]).blogs : Blog.all
+
     # kaminariのインストールによりモデルに対してpageメソッドが使えるようになる
-    @blogs = Blog.page(params[:page])
+    @blogs = @blogs.page(params[:page])
   end
 
   def new
@@ -65,7 +71,7 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:name, :title, :body)
+    params.require(:blog).permit(:name, :title, :body, tag_ids: [])
   end
 
   def set_target_blog

@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-if Rails.env == "development"
+if Rails.env == 'development'
   (1..30).each do |i|
-    Blog.create(name:"ユーザー",title:"タイトル#{i}",body:"本文#{i}")
+    Blog.create(name: 'ユーザー', title: "タイトル#{i}", body: "本文#{i}")
   end
-  
-  
+
+  Tag.create([{ name: 'Ruby' }, { name: 'Rails' }, { name: 'Js' }])
 end
