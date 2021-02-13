@@ -10,4 +10,9 @@ Rails
     # post "blogs", to:"blogs#create"
     # get "blogs/:id", to:"blogs#show"
     resources :blogs
+    resources :users, only: %i[new create]
+    root 'home#index'
+    get 'mypage', to: 'users#me'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy'
   end

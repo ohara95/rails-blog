@@ -35,6 +35,7 @@ class BlogsController < ApplicationController
                     blog: blog,
                     error_messages: blog.errors.full_messages,
                   }
+      # flash[:error_messages] ここにはバリデーションエラーが配列の形で格納される
     end
   end
 
@@ -45,7 +46,8 @@ class BlogsController < ApplicationController
 
   def edit
     #.attributes -> オブジェクトの属性情報（id, name, titleなど）をHashの形式で取得するメソッド
-    # memo 何故ハッシュに格納する必要が？
+    # updateのバリデーションでelse分に入った時に@blogだとエラーが出る
+    # Blogクラスのインスタンス以外のもの(フォームで入力した値)が入るためエラーになる
     @blog.attributes = flash[:blog] if flash[:blog]
   end
 
