@@ -22,4 +22,8 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  # データベース接続に使用するgem
+  adapter: postgresql
+  encoding: unicode
+  # コネクションポーリングで使用するコネクションの上限数
+  pool: 5
