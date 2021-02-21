@@ -41,7 +41,9 @@ class BlogsController < ApplicationController
 
   def show
     # @comment = @blog.comments.new
+    # コメントオブジェクトでblog_idが設定されている
     @comment = Comment.new(blog_id: @blog.id)
+    # @comment = @blog.comments.new(blog_id: @blog.id)
   end
 
   def edit

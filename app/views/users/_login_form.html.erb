@@ -1,7 +1,12 @@
 <h1>ログイン</h1>
-
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <%# モデルを使わずにinput要素のnameをネストしたい場合scopeに渡す %>
 <%# ex) session[name]とか %>
+<%# nameにsessionと入ることでparams[:session]で取得できるようになる %>
 <%= form_with scope: :session, url: login_path do |f| %>
   <div class="form-group">
     <%= f.label :name, 'ユーザー名' %>

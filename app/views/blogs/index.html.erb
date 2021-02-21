@@ -20,7 +20,9 @@
       %>
     <% end %>
     <%# new_blog_path = /blogs/new %>
-    <%= link_to '新規作成', new_blog_path, class: "btn btn-outline-dark" %>
+    <% if @current_user %>
+      <%= link_to '新規作成', new_blog_path, class: "btn btn-outline-dark" %>
+    <% end %>
   </div>
 </div>
 
@@ -31,7 +33,6 @@
   <table class="table table-hover boards__table">
   <thead class="thead-dark">
     <tr>
-      <th>ID</th>
       <th>タイトル</th>
       <th>作成者</th>
       <th>作成日時</th>
@@ -43,7 +44,6 @@
   <tbody>
     <% @blogs.each do |blog| %>
       <tr>
-        <td><%= blog.id %></td>
         <td><%= blog.title %></td>
         <td><%= blog.name %></td>
         <td><%= blog.created_at.to_s(:datetime_jp) %></td>

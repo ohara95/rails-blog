@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
     # user.authenticateでユーザー名とパスワードがマッチしているかを確認
     # authenticate -> has_secure_passwordを使用したことで自動的に追加されるメソッド
     # userかfalseが返る
-    if user && user.authenticate(paramas[:session][:password])
-      sesssion[:user_id] = user.id
-      redirect_to mypage_path
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      redirect_to blogs_path
     else
-      render 'home/index'
+      redirect_to root_path, alert: '入力に誤りがあります'
     end
   end
 
